@@ -1,0 +1,42 @@
+.card_container{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.photo{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.photo_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 110px;
+}
+.info_container{
+    border:  2px solid #cccccc;
+    margin-left: 10px;
+    flex-grow: 1;
+    border-radius: 5px;
+    padding: 10px;
+    display: grid;  
+    grid-template-areas: "name location"  
+                         "name location"  
+                         "status status";
+    grid-template-columns:  repeat(2, 1fr);  
+    grid-template-rows:  1fr 1fr 1fr; 
+}
+.name{
+    grid-area: name;
+}
+.location{
+    grid-area: location;
+}
+.status{
+    grid-area: status;
+    
+}

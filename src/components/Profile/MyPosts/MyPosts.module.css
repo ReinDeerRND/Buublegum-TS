@@ -1,0 +1,19 @@
+.item {
+    color: rgb(8, 31, 95);
+}
+.myposts_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+button{
+    padding: 5px 8px;
+    margin: 0 10px;
+}
+.posts_container{
+    margin: 10px;
+}
+.mypost_textarea{
+    width: 50%;
+}

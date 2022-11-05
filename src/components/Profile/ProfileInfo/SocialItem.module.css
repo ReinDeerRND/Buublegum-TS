@@ -1,0 +1,42 @@
+
+.social{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.social div{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-image: url("../../../assets/images/social.png");
+    background-repeat: no-repeat;
+    margin-top: 5px;
+}
+.social span{
+    margin: 0 5px;
+}
+.social div.facebook{
+     background-position: -8px -56px;
+}
+.social div.github{
+    background-position: -254px -106px;
+}
+.social div.instagram{
+    background-position: -58px -56px;
+}
+.social div.mainLink{
+    background-position: -156px -6px;
+}
+.social div.twitter{
+    background-position: -106px -106px;
+}
+.social div.vk{
+   background-position: -106px -202px;
+}
+.social div.website{
+   background-position: -156px -6px;
+}
+.social div.youtube{
+   background-position: -156px -104px;
+}
+

@@ -1,0 +1,14 @@
+.container {
+    margin: 15px;
+}
+.field {
+    margin-top: 16px;
+}
+.field.checkbox{
+    display: flex;
+}
+.common_error{
+    padding: 15px 0 5px 0;
+    color: red;
+    font-weight: bold;
+}

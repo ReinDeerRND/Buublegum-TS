@@ -1,0 +1,18 @@
+.header_wrapper{
+    background-color: rgb(243, 231, 190);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_img{
+    height: 50px;
+    width: auto;
+    margin: 25px;
+}
+.login_container{
+    margin: 25px;
+    color: rgb(30, 142, 170);
+    font-weight: bold;
+    font-size: 18px;
+}
+

@@ -1,0 +1,8 @@
+.status_container{
+    margin: 10px;
+    display: flex;
+    
+}
+.status_container .title{
+    margin-right: 5px;
+}

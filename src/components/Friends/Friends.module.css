@@ -1,0 +1,15 @@
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    margin:20px 10px;
+}
+.friend_item{
+    background-color: bisque;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}

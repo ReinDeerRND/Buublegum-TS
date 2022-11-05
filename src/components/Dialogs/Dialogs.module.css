@@ -1,0 +1,34 @@
+.wrapper{
+    display: flex;
+    min-height: 100%;
+}
+.dialogs_list{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgba(185, 185, 185, 0.3);
+}
+.dialog{
+    flex-grow: 1;
+}
+.dialog div:nth-child(2n){
+    margin-left: 50px;
+    background-color: khaki;
+}
+.dialog div:nth-child(2n+1){
+    margin-right: 50px;
+    background-color: orchid;
+}
+.dialog div:last-child{
+    background-color: transparent;
+}
+.dialog_item{
+    margin: 10px;
+}
+.new_message{
+    margin-left: 25px; 
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+

@@ -1,0 +1,10 @@
+.dialog_item {
+    margin: 10px;
+    text-decoration: none;
+    color: rgb(40, 183, 219)
+}
+.dialog_item.active{
+    color: gold;
+}
+
+
