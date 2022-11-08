@@ -1,15 +1,25 @@
 import { userAPI } from "../../api/api";
 import { updateArray } from "../../utils/object-convert";
+import {
+    FOLLOW,
+    UNFOLLOW,
+    SET_USERS,
+    SET_TOTAL_COUNT,
+    SET_SELECTED_PAGE,
+    TOGGLE_LOADING,
+    TOGGLE_FOLLOW,
+    UsersStateType,
+    UserType,
+    SetFollowType,
+    SetUnollowType,
+    SetUsersType,
+    SetTotalCountType,
+    SetSelectedPageType,
+    ToggleLoadingType,
+    ToggleFollowingType,
+} from "../models/users.model";
 
-const FOLLOW = "users/FOLLOW";
-const UNFOLLOW = "users/UNFOLLOW";
-const SET_USERS = "users/SET_USERS";
-const SET_TOTAL_COUNT = "users/SET_TOTAL_COUNT";
-const SET_SELECTED_PAGE = "users/SET_SELECTED_PAGE";
-const TOGGLE_LOADING = "users/TOGGLE_LOADING";
-const TOGGLE_FOLLOW = "users/TOGGLE_FOLLOW"
-
-let initState = {
+let initState: UsersStateType = {
     users: [],
     totalCount: 0,
     pageSize: 50,
@@ -18,17 +28,17 @@ let initState = {
     followUsersInProcess: []
 };
 
-const usersReducer = (state = initState, action) => {
+const usersReducer = (state = initState, action: any): UsersStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
                 ...state,
-                users: updateArray(state.users, "id", action.userId, {followed: true})
+                users: updateArray(state.users, "id", action.userId, { followed: true })
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users:updateArray(state.users, "id", action.userId, {followed: false})
+                users: updateArray(state.users, "id", action.userId, { followed: false })
             }
         case SET_USERS:
             return {
@@ -62,31 +72,31 @@ const usersReducer = (state = initState, action) => {
     }
 }
 
-export const setFollow = (userId) => ({ type: FOLLOW, userId });
-export const setUnfollow = (userId) => ({ type: UNFOLLOW, userId });
-export const setUsers = (users) => ({ type: SET_USERS, users });
-export const setTotalCount = (count) => ({ type: SET_TOTAL_COUNT, count });
-export const setSelectedPage = (pageNumber) => ({ type: SET_SELECTED_PAGE, pageNumber });
-export const toggleLoading = (isLoading) => ({ type: TOGGLE_LOADING, isLoading });
-export const toggleFollowing = (isLoading, userId) => ({ type: TOGGLE_FOLLOW, isLoading, userId });
+export const setFollow = (userId: number): SetFollowType => ({ type: FOLLOW, userId });
+export const setUnfollow = (userId: number): SetUnollowType => ({ type: UNFOLLOW, userId });
+export const setUsers = (users: UserType[]): SetUsersType => ({ type: SET_USERS, users });
+export const setTotalCount = (count: number): SetTotalCountType => ({ type: SET_TOTAL_COUNT, count });
+export const setSelectedPage = (pageNumber: number): SetSelectedPageType => ({ type: SET_SELECTED_PAGE, pageNumber });
+export const toggleLoading = (isLoading: boolean): ToggleLoadingType => ({ type: TOGGLE_LOADING, isLoading });
+export const toggleFollowing = (isLoading: boolean, userId: number): ToggleFollowingType => ({ type: TOGGLE_FOLLOW, isLoading, userId });
 //thunks
-export const getUsersThunkCreator = (selectedPage, pageSize) => async (dispatch) => {
+export const getUsersThunkCreator = (selectedPage: number, pageSize: number) => async (dispatch: any) => {
     dispatch(toggleLoading(true));
-    let data = await userAPI.getUsers(selectedPage + 1, pageSize)
+    let data = await userAPI.getUsers(selectedPage + 1, pageSize);
     dispatch(setUsers(data.items));
     dispatch(setTotalCount(data.totalCount));
     dispatch(toggleLoading(false));
 }
 
-export const followUserThunkCreator = (userId) => (dispatch) => {
+export const followUserThunkCreator = (userId: number) => (dispatch: any) => {
     followUnfollowFlow(dispatch, userId, setFollow, userAPI.followUser.bind(userAPI));
 }
 
-export const unfollowUserThunkCreator = (userId) => async (dispatch) => {
+export const unfollowUserThunkCreator = (userId: number) => async (dispatch: any) => {
     followUnfollowFlow(dispatch, userId, setUnfollow, userAPI.unfollowUser.bind(userAPI));
 }
 
-const followUnfollowFlow = async (dispatch, userId, setAction,  apiFn)=>{
+const followUnfollowFlow = async (dispatch: any, userId: number, setAction: any, apiFn: Function) => {
     dispatch(toggleFollowing(true, userId));
     let res = await apiFn(userId)
     if (res.data.resultCode === 0) {

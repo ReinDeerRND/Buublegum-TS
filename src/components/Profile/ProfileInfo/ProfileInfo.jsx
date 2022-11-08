@@ -40,7 +40,7 @@ const ProfileInfo = (props) => {
     <div>
       <img className={classes.content_img} src={backgroundPhoto} alt="China" />
       <div className={classes.description_block}>
-        <img alt="Avatar" src={props.profile.photos.small || userPhoto} />
+        <img alt="Avatar" src={props.profile.photos?.small || userPhoto} />
         {editMode ?
           <EditProfileData initialValues={props.profile} onSubmit={onSubmit}/> :
           <ProfileData profile={props.profile} switchToEditMode={toggleEditMode} isOwner={props.isOwner}/>}
