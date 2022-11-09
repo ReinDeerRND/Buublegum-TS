@@ -1,11 +1,8 @@
-export type Friend = {
-    id: number;
-    name: string;
-}
+import { FriendType } from "../../models/friends.model";
 
-export type FriendStateType = Array<Friend>;
+export type FriendStateType = Array<FriendType>;
 
-let initState: Friend[] = [
+let initState: FriendStateType = [
     { id: 2, name: "Yugor" },
     { id: 1, name: 'Sveta' },
     { id: 0, name: 'Andrew' },
