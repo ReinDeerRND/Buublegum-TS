@@ -1,20 +1,10 @@
+import { DialogType, MessageType } from "../../models/message.model";
+
 const SEND_MESSAGE = "message/SEND_MESSAGE";
 
 export type MessageStateType = {
     dialogs: Array<DialogType>;
     messages: Array<MessageType>;
-}
-
-export type DialogType = {
-    id: number;
-    name: string;
-}
-
-export type MessageType = {
-    id: number;
-    userId: number;
-    text: string;
-    income: boolean;
 }
 
 let initState: MessageStateType = {
