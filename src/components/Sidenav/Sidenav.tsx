@@ -2,14 +2,7 @@ import { NavLink } from "react-router-dom";
 import FriendsContainer from "../Friends/FriendsContainer";
 import classes from "./Sidenav.module.css";
 
-// let classes ={
-//   "item": "Uniq_name_put_automatically"
-// }
-//  joim classes: <div className={`${classes.item} ${classes.active}`}>
-
-
-
-const Sidenav = (props) => {
+const Sidenav = () => {
   return (
     <div className={classes.menu_wrapper}>
       <div className={classes.item}>
