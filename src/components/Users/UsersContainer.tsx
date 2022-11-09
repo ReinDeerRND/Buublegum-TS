@@ -15,10 +15,10 @@ import {
     getIsLoading,
     getFollowUsersInProcess
 } from '../../redux/selectors/users-selectors';
-//import Users from "./Users";
+import { AppStateType } from '../../redux/store';
 import UsersClass from './UsersClass';
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         users: getUsersReselector(state),
         totalCount: getTotalCount(state),
