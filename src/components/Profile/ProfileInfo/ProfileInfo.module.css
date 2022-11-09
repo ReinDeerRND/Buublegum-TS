@@ -3,19 +3,22 @@
     display: flex;
 }
 .description_block img {
-    height: 100px;
-    width: 100px;
+    height: 300px;
+    width: 300px;
     border-radius: 5px;
     margin-right: 15px;
 }
 .download_block{
-    margin: 0 10px;
+    width: 300px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
 }
+
 .download_block button{
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .content_img {
     width: 100%;
@@ -26,12 +29,17 @@
     align-items: center;
     flex-wrap: wrap;
 }
+.main_name{
+    font-weight: bold;
+    font-size: 18px;
+    color: #ff63ca;
+}
 .socials{
     display: flex;
     flex-direction: column;
 }
-.top_button{
-    margin-bottom: 5px;
+.save_button{
+    margin-top: 10px;
 }
 .contacts_title{
     margin-top: 10px;;

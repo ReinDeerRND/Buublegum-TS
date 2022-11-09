@@ -10,7 +10,7 @@ type PropsType = {
     partChunk?: number
 }
 
-const Paginator: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, onPageChanged, partChunk = 10 }) => {
+const Paginator: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, onPageChanged, partChunk = 20 }) => {
 
     let pagesAmount = Math.ceil(totalCount / pageSize);
     let defaultChunk = Math.floor(selectedPage / partChunk);

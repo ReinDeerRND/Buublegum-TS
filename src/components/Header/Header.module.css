@@ -1,18 +1,26 @@
 .header_wrapper{
-    background-color: rgb(243, 231, 190);
+    background-color: #f9ff94;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .header_img{
-    height: 50px;
+    height: 100px;
     width: auto;
-    margin: 25px;
+    margin: 10px 20px;
 }
 .login_container{
     margin: 25px;
-    color: rgb(30, 142, 170);
     font-weight: bold;
     font-size: 18px;
+}
+.title{
+    font-weight: bold;
+    font-size: 25px;
+    color: #2ae7fc;
+    text-shadow: 
+        0 0 2px rgb(1, 1, 14),
+        0 0 5px #87ffb0
+        
 }
 

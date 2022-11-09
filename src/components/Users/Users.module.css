@@ -1,6 +1,11 @@
+.users_container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .card_container{
     display: flex;
-    width: 100%;
+    width: 30%;
     padding: 10px;
     box-sizing: border-box;
 }
@@ -18,17 +23,16 @@
     width: 110px;
 }
 .info_container{
-    border:  2px solid #cccccc;
+    width: 80%;
+    border:  2px solid #ffc3c3;
     margin-left: 10px;
     flex-grow: 1;
     border-radius: 5px;
     padding: 10px;
     display: grid;  
-    grid-template-areas: "name location"  
-                         "name location"  
-                         "status status";
-    grid-template-columns:  repeat(2, 1fr);  
-    grid-template-rows:  1fr 1fr 1fr; 
+    grid-template-areas: "name "  
+                         "status";
+    grid-template-rows:  1fr 1fr; 
 }
 .name{
     grid-area: name;

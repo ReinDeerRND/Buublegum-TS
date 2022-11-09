@@ -5,7 +5,7 @@ import classes from './ProfileInfo.module.css';
 const EditProfileData = ({ handleSubmit, initialValues, error }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div className={classes.top_button}> <button type="submit">Save</button></div>
+     
       <div className={classes.common_error}>{error}</div>
       {createControl(InputControl, "fullName", "Name", [], { autoFocus: true })}
       {createControl(TextareaControl, "aboutMe", "About Me", [])}
@@ -15,6 +15,7 @@ const EditProfileData = ({ handleSubmit, initialValues, error }) => {
       <div className={classes.socials}>
         {Object.keys(initialValues.contacts).map(key => createControl(InputControl, "contacts." +  key, key, []))}
       </div>
+      <div className={classes.save_button}> <button type="submit">Save</button></div>
     </form>
   )
 }

@@ -22,7 +22,7 @@ import {
 let initState: UsersStateType = {
     users: [],
     totalCount: 0,
-    pageSize: 50,
+    pageSize: 51,
     selectedPage: 0,
     isLoading: false,
     followUsersInProcess: []

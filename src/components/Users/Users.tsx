@@ -1,6 +1,7 @@
 import React from "react";
 import { UserType } from "../../models/users.model";
 import Paginator from "../common/Paginator/Paginator";
+import classes from './Users.module.css';
 import User from "./User";
 
 type PropsType = {
@@ -17,15 +18,17 @@ type PropsType = {
 const Users: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, onPageChanged, users, ...props }) => {
     return <div>
         <Paginator selectedPage={selectedPage} totalCount={totalCount} pageSize={pageSize} onPageChanged={onPageChanged} />
-        {
-            users.map((user: UserType) => <User
-                key={user.id}
-                user={user}
-                followUsersInProcess={props.followUsersInProcess}
-                followUserThunkCreator={props.followUserThunkCreator}
-                unfollowUserThunkCreator={props.unfollowUserThunkCreator}
-            />)
-        }
+        <div className={classes.users_container}>
+            {
+                users.map((user: UserType) => <User
+                    key={user.id}
+                    user={user}
+                    followUsersInProcess={props.followUsersInProcess}
+                    followUserThunkCreator={props.followUserThunkCreator}
+                    unfollowUserThunkCreator={props.unfollowUserThunkCreator}
+                />)
+            }
+        </div>
     </div>
 }
 

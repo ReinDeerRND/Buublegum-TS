@@ -1,5 +1,5 @@
 .menu_wrapper{
-    background-color: rgb(40, 183, 219);
+    background-color: 	#ff63ca;
     height: 100%;
 }
 .item {
@@ -7,9 +7,10 @@
 }
 .item a{
     text-decoration: none;
-    color: white;
+    color: #92f5ff;
 }
 
 .item a.active{
-    color: gold;
+    color: #f9ff94;
+    font-weight: bold;
 }

@@ -1,8 +1,6 @@
 import Preloader from '../../common/Preloader/Preloader';
 import classes from './ProfileInfo.module.css';
 import userPhoto from "../../../assets/images/userphoto.jpg";
-import backgroundPhoto from "../../../assets/images/china.jpg";
-//import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileData from './ProfileData';
 import EditProfileData from './EditProfileData';
@@ -31,28 +29,33 @@ const ProfileInfo = (props) => {
     setEditMode(mode);
   }
 
-  const onSubmit =(formData)=>{
+  const onSubmit = (formData) => {
     props.uploadProfileData(formData);
     toggleEditMode(false);
   }
 
   return (
     <div>
-      <img className={classes.content_img} src={backgroundPhoto} alt="China" />
+      <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner} />
       <div className={classes.description_block}>
-        <img alt="Avatar" src={props.profile.photos?.small || userPhoto} />
-        {editMode ?
-          <EditProfileData initialValues={props.profile} onSubmit={onSubmit}/> :
-          <ProfileData profile={props.profile} switchToEditMode={toggleEditMode} isOwner={props.isOwner}/>}
-      </div>
-      <div className={classes.download_block}>
-        {props.isOwner && <div>
-          <input type="file" onChange={onFileSelected} />
-          <button onClick={onUploadPhoto}>Upload Photo</button>
+        <div>
+          <img alt="Avatar" src={props.profile.photos?.large || userPhoto} />
+          <div className={classes.download_block}>
+            {props.isOwner && <div>
+              <input type="file" onChange={onFileSelected} />
+              <button onClick={onUploadPhoto}>Upload Photo</button>
+            </div>
+            }
+          </div>
         </div>
-        }
+        <div>
+          {editMode ?
+            <EditProfileData initialValues={props.profile} onSubmit={onSubmit} /> :
+            <ProfileData profile={props.profile} switchToEditMode={toggleEditMode} isOwner={props.isOwner} />}
+        </div>
       </div>
-      <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner }/>
+
+
     </div>
   )
 }

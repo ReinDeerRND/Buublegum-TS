@@ -29,10 +29,6 @@ const User: React.FC<PropsType> = ({ user, followUsersInProcess, followUserThunk
         </div>
         <div className={classes.info_container}>
             <div className={classes.name}>{user.name}</div>
-            <div className={classes.location}>
-                <div>{"user.location.country"}</div>
-                <div>{"user.location.city"}</div>
-            </div>
             <div className={classes.status}>{user.status}</div>
         </div>
     </div>;

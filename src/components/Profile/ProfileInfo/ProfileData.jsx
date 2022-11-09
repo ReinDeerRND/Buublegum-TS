@@ -9,8 +9,8 @@ const ProfileData = ({ profile, switchToEditMode, isOwner }) => {
 
   return (
     <div>
-      {isOwner && <div className={classes.top_button}> <button onClick={onSwitchToEditMode}>Edit Data...</button></div>}
-      <div>Name: {profile.fullName}</div>
+     
+      <div className={classes.main_name}>Name: {profile.fullName}</div>
       <div>About me: {profile.aboutMe}</div>
       <div>Search a Job: {profile.lookingForAJob ? <span>yes</span> : <span>no</span>}</div>
       {profile.lookingForAJob && profile.lookingForAJobDescription &&
@@ -25,6 +25,7 @@ const ProfileData = ({ profile, switchToEditMode, isOwner }) => {
           return value ? <SocialItem social={value} title={key} key={key} /> : null;
         })}
       </div>
+      {isOwner && <div className={classes.save_button}> <button onClick={onSwitchToEditMode}>Edit Data...</button></div>}
     </div>
   )
 }
