@@ -14,7 +14,7 @@ const Paginator: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, on
 
     let pagesAmount = Math.ceil(totalCount / pageSize);
     let defaultChunk = Math.floor(selectedPage / partChunk);
-    let [selectedChunk, setSelectedChunk] = useState(defaultChunk);
+    let [selectedChunk, setSelectedChunk] = useState<number>(defaultChunk);
 
     let begin_portion = selectedChunk * partChunk;
     let end_portion = begin_portion + partChunk > pagesAmount

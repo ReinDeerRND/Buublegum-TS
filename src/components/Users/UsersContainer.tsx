@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuhRedirect';
+import { UserType } from '../../models/users.model';
 import {
     setSelectedPage,
     getUsersThunkCreator,
@@ -18,7 +19,23 @@ import {
 import { AppStateType } from '../../redux/store';
 import UsersClass from './UsersClass';
 
-let mapStateToProps = (state: AppStateType) => {
+
+type MapStateToPropsType = {
+    selectedPage: number;
+    pageSize: number;
+    isLoading: boolean;
+    users: Array<UserType>;
+    totalCount: number;
+    followUsersInProcess: Array<number>;
+}
+type MapDispatchToPorops = {
+    getUsersThunkCreator: (page: number, pageSize: number) => void;
+    setSelectedPage: (page: number) => void;
+    followUserThunkCreator: (userId: number) => void;
+    unfollowUserThunkCreator: (userId: number) => void;
+}
+
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: getUsersReselector(state),
         totalCount: getTotalCount(state),
@@ -31,7 +48,12 @@ let mapStateToProps = (state: AppStateType) => {
 
 export default compose(
     withAuthRedirect,
-    connect(mapStateToProps, {
-        setSelectedPage, getUsersThunkCreator, unfollowUserThunkCreator, followUserThunkCreator
-    })
+    connect<MapStateToPropsType, MapDispatchToPorops, {/* OwnPropsType */}, AppStateType>(
+        mapStateToProps,
+        {
+            setSelectedPage,
+            getUsersThunkCreator,
+            unfollowUserThunkCreator,
+            followUserThunkCreator
+        })
 )(UsersClass);
