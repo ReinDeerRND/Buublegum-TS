@@ -14,7 +14,7 @@ import {
     SetStatusActionType,
     UpdatePhotoActionType
 } from '../models/profile.model';
-import { PhotoType } from "../models/api.model";
+import { PhotoType } from "../../models/users.model";
 
 let initState: ProfileStateType = {
     profile: null,

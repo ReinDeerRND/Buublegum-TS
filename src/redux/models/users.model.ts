@@ -1,13 +1,5 @@
-import { PhotoType } from "./api.model";
+import { UserType } from "../../models/users.model";
 
-export type UserType = {
-    followed: boolean; 
-    id: number;
-    name: string;
-    photos: PhotoType
-    status: string | null;
-    uniqueUrlName: string | null;
-}
 
 export const FOLLOW = "users/FOLLOW";
 export const UNFOLLOW = "users/UNFOLLOW";

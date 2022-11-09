@@ -1,4 +1,4 @@
-import { PhotoType } from "./api.model";
+import { PhotoType } from "../../models/users.model";
 
 export type ProfileStateType = {
     profile: ProfileType | null;

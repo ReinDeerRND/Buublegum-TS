@@ -2,8 +2,16 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 import classes from './Users.module.css';
 import userPhoto from "../../assets/images/userphoto.jpg";
+import { UserType } from "../../models/users.model";
 
-const User = ({ user, followUsersInProcess, followUserThunkCreator, unfollowUserThunkCreator }) => {
+type PropsType = {
+    user: UserType
+    followUsersInProcess: Array<number>;
+    followUserThunkCreator: (userId: number) => void;
+    unfollowUserThunkCreator: (userId: number) => void;
+}
+
+const User: React.FC<PropsType> = ({ user, followUsersInProcess, followUserThunkCreator, unfollowUserThunkCreator }) => {
     return <div className={classes.card_container}>
         <div className={classes.photo_container}>
             <NavLink to={"/profile/" + user.id}>

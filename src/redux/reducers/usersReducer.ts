@@ -1,4 +1,5 @@
 import { userAPI } from "../../api/api";
+import { UserType } from "../../models/users.model";
 import { updateArray } from "../../utils/object-convert";
 import {
     FOLLOW,
@@ -9,7 +10,6 @@ import {
     TOGGLE_LOADING,
     TOGGLE_FOLLOW,
     UsersStateType,
-    UserType,
     SetFollowType,
     SetUnollowType,
     SetUsersType,

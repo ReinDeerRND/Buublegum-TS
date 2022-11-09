@@ -2,7 +2,15 @@ import cn from "classnames";
 import React, { useState } from "react";
 import classes from './Paginator.module.css';
 
-const Paginator = ({ selectedPage, totalCount, pageSize, onPageChanged, partChunk = 10 }) => {
+type PropsType = {
+    selectedPage: number;
+    totalCount: number;
+    pageSize: number;
+    onPageChanged: (page: number) => void;
+    partChunk?: number
+}
+
+const Paginator: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, onPageChanged, partChunk = 10 }) => {
 
     let pagesAmount = Math.ceil(totalCount / pageSize);
     let defaultChunk = Math.floor(selectedPage / partChunk);
@@ -12,7 +20,7 @@ const Paginator = ({ selectedPage, totalCount, pageSize, onPageChanged, partChun
     let end_portion = begin_portion + partChunk > pagesAmount
         ? pagesAmount
         : begin_portion + partChunk;
-    let pages = [];
+    let pages: number[] = [];
     for (let i = begin_portion; i < end_portion; i++) {
         pages.push(i);
     }
