@@ -46,3 +46,5 @@ export type UpdatePhotoActionType = {
     type: typeof UPLOAD_PHOTO_SUCCESS;
     photos: PhotoType;
 }
+
+export type ProfileActionType = AddPostActionType | DeletePostActionType | SetUserProfileActionType | SetStatusActionType | UpdatePhotoActionType;

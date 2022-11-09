@@ -18,8 +18,8 @@ const Dialogs: React.FC<PropsType> = (props) => {
   let dialogsList = props.dialogs.map(dialog => (<DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />));
   let messageList = props.messages.map(message => (<Message message={message.text} key={message.id} />));
 
-  let onSubmit = (newMessage: string) => {
-    props.sendMessage(newMessage);
+  let onSubmit = (formData: {newMessage: string}) => {
+    props.sendMessage(formData.newMessage);
   }
   return (
     <div className={classes.wrapper}>

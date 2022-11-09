@@ -12,7 +12,8 @@ import {
     ProfileType,
     SetUserProfileActionType,
     SetStatusActionType,
-    UpdatePhotoActionType
+    UpdatePhotoActionType,
+    ProfileActionType
 } from '../models/profile.model';
 import { PhotoType } from "../../models/users.model";
 
@@ -25,7 +26,7 @@ let initState: ProfileStateType = {
     ],
 };
 
-const profileReducer = (state = initState, action: any): ProfileStateType => {
+const profileReducer = (state = initState, action: ProfileActionType): ProfileStateType => {
     switch (action.type) {
         case ADD_POST:
             let post = {

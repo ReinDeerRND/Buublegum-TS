@@ -17,6 +17,7 @@ import {
     SetSelectedPageType,
     ToggleLoadingType,
     ToggleFollowingType,
+    UsersActionsType,
 } from "../models/users.model";
 
 let initState: UsersStateType = {
@@ -28,7 +29,7 @@ let initState: UsersStateType = {
     followUsersInProcess: []
 };
 
-const usersReducer = (state = initState, action: any): UsersStateType => {
+const usersReducer = (state = initState, action: UsersActionsType): UsersStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -63,9 +64,9 @@ const usersReducer = (state = initState, action: any): UsersStateType => {
         case TOGGLE_FOLLOW:
             return {
                 ...state,
-                followUsersInProcess: action.isLoading
-                    ? [...state.followUsersInProcess, action.userId]
-                    : state.followUsersInProcess.map(user => user !== action.userId)
+                followUsersInProcess: action.payload.isLoading 
+                    ? [...state.followUsersInProcess, action.payload.userId]
+                    : state.followUsersInProcess.filter(user => user !== action.payload.userId)
             }
         default:
             return state;
@@ -78,7 +79,7 @@ export const setUsers = (users: UserType[]): SetUsersType => ({ type: SET_USERS,
 export const setTotalCount = (count: number): SetTotalCountType => ({ type: SET_TOTAL_COUNT, count });
 export const setSelectedPage = (pageNumber: number): SetSelectedPageType => ({ type: SET_SELECTED_PAGE, pageNumber });
 export const toggleLoading = (isLoading: boolean): ToggleLoadingType => ({ type: TOGGLE_LOADING, isLoading });
-export const toggleFollowing = (isLoading: boolean, userId: number): ToggleFollowingType => ({ type: TOGGLE_FOLLOW, isLoading, userId });
+export const toggleFollowing = (isLoading: boolean, userId: number): ToggleFollowingType => ({ type: TOGGLE_FOLLOW, payload: { isLoading, userId } });
 //thunks
 export const getUsersThunkCreator = (selectedPage: number, pageSize: number) => async (dispatch: any) => {
     dispatch(toggleLoading(true));

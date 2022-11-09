@@ -1,6 +1,5 @@
 import { DialogType, MessageType } from "../../models/message.model";
-
-const SEND_MESSAGE = "message/SEND_MESSAGE";
+import { MessageActionType, SendMessageCreatorType, SEND_MESSAGE } from "../models/message.model";
 
 export type MessageStateType = {
     dialogs: Array<DialogType>;
@@ -22,13 +21,15 @@ let initState: MessageStateType = {
     ],
 };
 
-const messageReducer = (state = initState, action: any): MessageStateType => {
+const messageReducer = (state = initState, action: MessageActionType): MessageStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
+            console.log(action);
+
             let message = {
                 id: state.messages.length,
                 userId: 0,
-                text: action.newMessage.newMessage,
+                text: action.newMessage,
                 income: false
             }
             return {
@@ -38,11 +39,6 @@ const messageReducer = (state = initState, action: any): MessageStateType => {
         default:
             return state;
     }
-}
-
-export type SendMessageCreatorType = {
-    type: typeof SEND_MESSAGE;
-    newMessage: string;
 }
 
 export const sendMessageCreator = (newMessage: string): SendMessageCreatorType => ({ type: SEND_MESSAGE, newMessage });

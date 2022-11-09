@@ -1,8 +1,8 @@
 import { stopSubmit } from "redux-form";
 import { authAPI, securityAPI } from "../../api/api";
+import { AuthActionType, SetAuthUserDataActionType, SetCaptchaUrlActionType, SET_AUTH_USER_DATA, SET_CAPTCHA_URL } from "../models/auth.model";
 
-const SET_AUTH_USER_DATA = "auth/SET_AUTH_USER_DATA";
-const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL";
+
 
 export type AuthStateType = {
     userId: number | null;
@@ -20,7 +20,7 @@ let initState: AuthStateType = {
     captchaUrl: null,
 };
 
-const authReducer = (state = initState, action: any): AuthStateType => {
+const authReducer = (state = initState, action: AuthActionType): AuthStateType => {
     switch (action.type) {
         case SET_AUTH_USER_DATA:
             return {
@@ -35,21 +35,6 @@ const authReducer = (state = initState, action: any): AuthStateType => {
         default:
             return state;
     }
-}
-
-export type SetAuthUserDataActionType = {
-    type: typeof SET_AUTH_USER_DATA | typeof SET_CAPTCHA_URL;
-    userData: {
-        userId: number | null;
-        email: string | null;
-        login: string | null;
-        isLogged: boolean;
-    }
-}
-
-export type SetCaptchaUrlActionType = {
-    type: typeof SET_AUTH_USER_DATA | typeof SET_CAPTCHA_URL;
-    captchaUrl: string;
 }
 
 export const setAuthUserData = (

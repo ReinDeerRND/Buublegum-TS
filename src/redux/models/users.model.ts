@@ -19,31 +19,35 @@ export type UsersStateType = {
 }
 
 export type SetFollowType = {
-    type: typeof FOLLOW, 
+    type: typeof FOLLOW,
     userId: number;
 }
 export type SetUnollowType = {
-    type: typeof UNFOLLOW, 
+    type: typeof UNFOLLOW,
     userId: number;
 }
 export type SetUsersType = {
-    type: typeof SET_USERS, 
+    type: typeof SET_USERS,
     users: UserType[];
 }
 export type SetTotalCountType = {
-    type: typeof SET_TOTAL_COUNT, 
+    type: typeof SET_TOTAL_COUNT,
     count: number;
 }
 export type SetSelectedPageType = {
-    type: typeof SET_SELECTED_PAGE, 
+    type: typeof SET_SELECTED_PAGE,
     pageNumber: number;
 }
 export type ToggleLoadingType = {
-    type: typeof TOGGLE_LOADING, 
+    type: typeof TOGGLE_LOADING,
     isLoading: boolean;
 }
 export type ToggleFollowingType = {
-    type: typeof TOGGLE_FOLLOW, 
-    isLoading: boolean;
-    userId: number;
+    type: typeof TOGGLE_FOLLOW,
+    payload: {
+        isLoading: boolean;
+        userId: number;
+    }
 }
+
+export type UsersActionsType = SetFollowType | SetUnollowType | SetUsersType | SetTotalCountType | SetSelectedPageType | ToggleLoadingType | ToggleFollowingType;

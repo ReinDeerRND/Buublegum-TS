@@ -1,18 +1,15 @@
+import { AppInitialActionType, InitialActionType, SET_INITIALIZED } from "../models/app.model";
 import { getAuthThunkCreator } from "./authReducer";
 
-const SET_INITIALIZED = "app/SET_INITIALIZED";
+
 
 export type InitialStateType = {
     isInitialized: boolean;
 }
 
-export type InitialActionType = {
-    type: typeof SET_INITIALIZED;
-}
-
 let initState: InitialStateType = { isInitialized: false };
 
-const appReducer = (state = initState, action: any): InitialStateType => {
+const appReducer = (state = initState, action: AppInitialActionType): InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZED:
             return {
