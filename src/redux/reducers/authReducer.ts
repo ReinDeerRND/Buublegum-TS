@@ -1,6 +1,7 @@
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
 import { authAPI, securityAPI } from "../../api/api";
+import { ResponseTypes } from "../../api/api.model";
 import { AuthActionType, SetAuthUserDataActionType, SetCaptchaUrlActionType, SET_AUTH_USER_DATA, SET_CAPTCHA_URL } from "../models/auth.model";
 
 
@@ -51,21 +52,21 @@ type ThunkType = ThunkAction<void, AuthStateType, unknown, AuthActionType>
 export const getAuthThunkCreator = (): ThunkType => async (dispatch: any) => {
     //dispatch can return something, this example - it returns Promise
     let res = await authAPI.getAuth();
-    if (res.data.resultCode === 0) {
-        let { id, login, email } = res.data.data;
+    if (res.resultCode === ResponseTypes.Success) {
+        let { id, login, email } = res.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: any): ThunkType => async (dispatch: any) => {
     let res = await authAPI.login(email, password, rememberMe, captcha);
-    if (res.data.resultCode === 0) {
+    if (res.resultCode === ResponseTypes.Success) {
         dispatch(getAuthThunkCreator());
     } else {
-        if (res.data.resultCode === 10) {
+        if (res.resultCode === ResponseTypes.CaptchaIsRequired) {
             dispatch(getCaptchaUrl());
         }
-        let message = res.data?.messages?.length > 0 ? res.data.messages[0] : 'Any error occured';
+        let message = res.messages.length > 0 ? res.messages[0] : 'Any error occured';
         // action creator from redux-form, может показыавть конкретные поля формы {login: "Login error occured"}
         dispatch(stopSubmit("login", { _error: message }))
     }
@@ -73,7 +74,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 
 export const logout = (): ThunkType => async (dispatch: any) => {
     let res = await authAPI.logout();
-    if (res.data.resultCode === 0) {
+    if (res.resultCode === ResponseTypes.Success) {
         dispatch(setAuthUserData(null, null, null, false));
     }
 }

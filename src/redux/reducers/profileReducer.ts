@@ -17,6 +17,7 @@ import {
 } from '../models/profile.model';
 import { PhotoType } from "../../models/users.model";
 import { ThunkAction } from "redux-thunk";
+import { ResponseTypes } from "../../api/api.model";
 
 let initState: ProfileStateType = {
     profile: null,
@@ -78,19 +79,19 @@ export const updatePhoto = (photos: PhotoType): UpdatePhotoActionType => ({ type
 
 type ThunkType = ThunkAction<void, ProfileStateType, unknown, ProfileActionType>
 
-export const getProfileThunkCreator = (userId: number | null): ThunkType => async (dispatch: any) => {
+export const getProfileThunkCreator = (userId: number): ThunkType => async (dispatch: any) => {
     let data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
 }
 
-export const getStatusThunkCreator = (userId: number | null): ThunkType => async (dispatch: any) => {
+export const getStatusThunkCreator = (userId: number): ThunkType => async (dispatch: any) => {
     let status = await profileAPI.getStatus(userId);
     dispatch(setStatus(status));
 }
 
 export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: any) => {
     let result = await profileAPI.updateStatus(status);
-    if (result === 0) {
+    if (result.resultCode === ResponseTypes.Success) {
         dispatch(setStatus(status));
     }
 }

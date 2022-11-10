@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { userAPI } from "../../api/api";
+import { ResponseTypes } from "../../api/api.model";
 import { UserType } from "../../models/users.model";
 import { updateArray } from "../../utils/object-convert";
 import {
@@ -111,7 +112,7 @@ const followUnfollowFlow = async (
 ): Promise<void> => {
     dispatch(toggleFollowing(true, userId));
     let res = await apiFn(userId)
-    if (res.data.resultCode === 0) {
+    if (res.resultCode === ResponseTypes.Success) {
         dispatch(setAction(userId))
     }
     dispatch(toggleFollowing(false, userId));
