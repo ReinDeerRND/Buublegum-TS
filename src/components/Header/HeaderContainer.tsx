@@ -21,7 +21,7 @@ type MapStateToPropsType = {
   login: string | null;
 }
 type MapDispatchToPropsType = {
-  logout: () => (dispatch: any) => Promise<any>
+  logout: () => void
 }
 
 

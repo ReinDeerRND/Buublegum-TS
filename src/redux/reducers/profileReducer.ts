@@ -16,6 +16,7 @@ import {
     ProfileActionType
 } from '../models/profile.model';
 import { PhotoType } from "../../models/users.model";
+import { ThunkAction } from "redux-thunk";
 
 let initState: ProfileStateType = {
     profile: null,
@@ -74,30 +75,33 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileActionType =
 export const setStatus = (status: string): SetStatusActionType => ({ type: SET_STATUS, status });
 export const updatePhoto = (photos: PhotoType): UpdatePhotoActionType => ({ type: UPLOAD_PHOTO_SUCCESS, photos });
 
-export const getProfileThunkCreator = (userId: number | null) => async (dispatch: any) => {
+
+type ThunkType = ThunkAction<void, ProfileStateType, unknown, ProfileActionType>
+
+export const getProfileThunkCreator = (userId: number | null): ThunkType => async (dispatch: any) => {
     let data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
 }
 
-export const getStatusThunkCreator = (userId: number | null) => async (dispatch: any) => {
+export const getStatusThunkCreator = (userId: number | null): ThunkType => async (dispatch: any) => {
     let status = await profileAPI.getStatus(userId);
     dispatch(setStatus(status));
 }
 
-export const updateStatusThunkCreator = (status: string) => async (dispatch: any) => {
+export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: any) => {
     let result = await profileAPI.updateStatus(status);
     if (result === 0) {
         dispatch(setStatus(status));
     }
 }
 
-export const uploadPhoto = (file: any) => async (dispatch: any) => {
+export const uploadPhoto = (file: any) : ThunkType => async (dispatch: any) => {
     let response = await profileAPI.uploadPhoto(file);
     if (response.resultCode === 0) {
         dispatch(updatePhoto(response.data.photos));
     }
 }
-export const uploadProfileData = (formData: ProfileType) => async (dispatch: any, getState: any) => {
+export const uploadProfileData = (formData: ProfileType): ThunkType => async (dispatch: any, getState: any) => {
     const userId = getState().auth.userId;
 
     let response = await profileAPI.uploadProfile(formData);
