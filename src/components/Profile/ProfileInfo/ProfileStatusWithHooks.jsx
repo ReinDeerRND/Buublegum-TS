@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import classes from './ProfileStatus.module.css';
+import pencil from '../../../assets/icons/pen.png'
 
 const ProfileStatusWithHooks = (props) => {
     let [editMode, setEditMode] = useState(false);
@@ -27,7 +28,13 @@ const ProfileStatusWithHooks = (props) => {
         <div className={classes.status_container}>
             {
                 !editMode &&
-                <div><span onDoubleClick={activateEditMode}>{status}</span></div>
+                <div onDoubleClick={activateEditMode}>
+                    <span >{status}</span>
+                    {
+                        props.isOwner &&
+                        <img className={classes.pencil} src={pencil} alt="edit" />
+                    }
+                </div>
             }
             {
                 editMode &&
