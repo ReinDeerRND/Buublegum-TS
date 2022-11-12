@@ -28,7 +28,7 @@ type MapStateToPropsType = {
     totalCount: number;
     followUsersInProcess: Array<number>;
 }
-type MapDispatchToPorops = {
+type MapDispatchToProps = {
     getUsersThunkCreator: (page: number, pageSize: number) => void;
     setSelectedPage: (page: number) => void;
     followUserThunkCreator: (userId: number) => void;
@@ -48,7 +48,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export default compose(
     withAuthRedirect,
-    connect<MapStateToPropsType, MapDispatchToPorops, {/* OwnPropsType */}, AppStateType>(
+    connect<MapStateToPropsType, MapDispatchToProps, {/* OwnPropsType */}, AppStateType>(
         mapStateToProps,
         {
             setSelectedPage,

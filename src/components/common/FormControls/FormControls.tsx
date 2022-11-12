@@ -1,8 +1,14 @@
 import classes from './FormControls.module.css';
-import { Field } from 'redux-form';
+import { Field, WrappedFieldProps } from 'redux-form';
 import cn from 'classnames';
+import { ValidatorFn } from '../../../utils/validators';
 
-export const TextareaControl = ({ input, meta, ...props }) => {
+type ControlOwnProps = {
+    [x: string]: string | boolean;
+} | {}
+type ControlProps = WrappedFieldProps & ControlOwnProps;
+
+export const TextareaControl: React.FC<ControlProps> = ({ input, meta, ...props }) => {
     const hasError = meta.touched && meta.error
     return (
         <div className={cn(classes.form_control, { [classes.error]: hasError })}>
@@ -13,7 +19,7 @@ export const TextareaControl = ({ input, meta, ...props }) => {
     )
 }
 
-export const InputControl = ({ input, meta, ...props }) => {
+export const InputControl: React.FC<ControlProps> = ({ input, meta, ...props }) => {
     const hasError = meta.touched && meta.error
     return (
         <div className={cn(classes.form_control, { [classes.error]: hasError })}>
@@ -23,9 +29,16 @@ export const InputControl = ({ input, meta, ...props }) => {
     )
 }
 
-export const createControl = (componentType, name, placeholder, validators, props, text = "") => {
+export const createControl = (
+    componentType: React.ComponentType<WrappedFieldProps>,
+    name: string,
+    placeholder: string | null,
+    validators: Array<ValidatorFn>,
+    props: { [x: string]: any },
+    text: string = ""
+) => {
     return (
-        <div className={cn(classes.field, {[classes.checkbox]: props?.type === "checkbox"})} key={name}>
+        <div className={cn(classes.field, { [classes.checkbox]: props?.type === "checkbox" })} key={name}>
             <Field component={componentType} name={name} placeholder={placeholder} validate={validators}  {...props} />
             <span className={classes.field_span}>{text}</span>
         </div>
