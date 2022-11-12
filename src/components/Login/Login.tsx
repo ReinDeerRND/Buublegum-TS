@@ -16,15 +16,17 @@ type LoginFormDataType = {
 type LoginOwnPropsType = {
     captchaUrl: string | null;
 }
+type ControlsTypes = keyof LoginFormDataType; // = Extract<keyof LoginFormDataType, string> - выбирает только string
+
 const LoginForm: React.FC<LoginOwnPropsType & InjectedFormProps<LoginFormDataType, LoginOwnPropsType, string>> = ({ handleSubmit, error, captchaUrl }) => {
     return (
         <form onSubmit={handleSubmit}>
-            {createControl(InputControl, "login", "Login", [requiredField], { autoFocus: true })}
-            {createControl(InputControl, "password", "Password", [requiredField], { type: "password" })}
-            {createControl(InputControl, "isRemember", null, [], { type: "checkbox" }, "Remember me")}
+            {createControl<ControlsTypes>(InputControl, "login", "Login", [requiredField], { autoFocus: true })}
+            {createControl<ControlsTypes>(InputControl, "password", "Password", [requiredField], { type: "password" })}
+            {createControl<ControlsTypes>(InputControl, "isRemember", null, [], { type: "checkbox" }, "Remember me")}
 
             {captchaUrl && <img src={captchaUrl} alt="Captcha" />}
-            {captchaUrl && createControl(InputControl, "captcha", "Enter figures from picture", [requiredField], {})}
+            {captchaUrl && createControl<ControlsTypes>(InputControl, "captcha", "Enter figures from picture", [requiredField], {})}
             <div className={classes.common_error}>{error}</div>
             <div className={classes.field}>
                 <button type="submit">Log In</button>

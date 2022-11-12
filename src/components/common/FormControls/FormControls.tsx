@@ -29,14 +29,14 @@ export const InputControl: React.FC<ControlProps> = ({ input, meta, ...props }) 
     )
 }
 
-export const createControl = (
+export function createControl<ControlNamesTypes extends string> (
     componentType: React.ComponentType<WrappedFieldProps>,
-    name: string,
+    name: ControlNamesTypes,
     placeholder: string | null,
     validators: Array<ValidatorFn>,
     props: { [x: string]: any },
     text: string = ""
-) => {
+) {
     return (
         <div className={cn(classes.field, { [classes.checkbox]: props?.type === "checkbox" })} key={name}>
             <Field component={componentType} name={name} placeholder={placeholder} validate={validators}  {...props} />
