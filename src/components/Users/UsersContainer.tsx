@@ -3,10 +3,10 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuhRedirect';
 import { UserType } from '../../models/users.model';
 import {
-    setSelectedPage,
+    unfollowUserThunkCreator,
     getUsersThunkCreator,
     followUserThunkCreator,
-    unfollowUserThunkCreator
+    usersActions
 } from '../../redux/reducers/usersReducer';
 import {
     getTotalCount,
@@ -51,7 +51,7 @@ export default compose(
     connect<MapStateToPropsType, MapDispatchToProps, {/* OwnPropsType */}, AppStateType>(
         mapStateToProps,
         {
-            setSelectedPage,
+            setSelectedPage: usersActions.setSelectedPage,
             getUsersThunkCreator,
             unfollowUserThunkCreator,
             followUserThunkCreator

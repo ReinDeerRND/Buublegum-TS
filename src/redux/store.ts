@@ -26,6 +26,9 @@ let reducers = combineReducers({
 type ReducersType  = typeof reducers; //(state: AppStateType)=> AppStateType
 export type AppStateType = ReturnType<ReducersType>;
 
+type PropertiesType<T> = T extends {[action: string]: infer U}? U : never;
+export type ActionsType<T extends  {[action: string]: (...args: any[])=>any}> = ReturnType <PropertiesType<T>>;
+
 // without Redux DevTools
     //let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
