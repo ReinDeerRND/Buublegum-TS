@@ -1,5 +1,5 @@
 import { FriendType } from "../../models/friends.model";
-import { AddFriendType, ADD_FRIEND, FriendActionType } from "../models/friends.model";
+import { ActionsType } from "../store";
 
 export type FriendStateType = Array<FriendType>;
 
@@ -12,7 +12,7 @@ let initState: FriendStateType = [
 
 const friendsWidgetReducer = (state = initState, action: FriendActionType): FriendStateType => {
     switch (action.type) {
-        case ADD_FRIEND:
+        case "friends/ADD_FRIEND":
             return [
                 ...state,
                 action.friend]
@@ -22,6 +22,9 @@ const friendsWidgetReducer = (state = initState, action: FriendActionType): Frie
     }
 }
 
-export const addFriend = (friend: FriendType): AddFriendType => ({ type: ADD_FRIEND, friend })
+export const friendActions = {
+    addFriend:  (friend: FriendType) => ({ type: "friends/ADD_FRIEND", friend })
+}
+type FriendActionType = ActionsType <typeof friendActions>;
 
 export default friendsWidgetReducer;
