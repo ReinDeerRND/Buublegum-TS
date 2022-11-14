@@ -6,27 +6,18 @@ export enum ResponseTypes {
     CaptchaIsRequired = 10
 }
 
-export type MeResponseType = {
-    data: {
-        id: number;
-        login: string;
-        email: string;
-    },
-    resultCode: number;
-    messages: Array<string>;
-}
-export type LoginResponseType = {
-    data: {
-        id: number;
-    },
-    resultCode: number;
-    messages: Array<string>;
-}
-export type ResultResponseType = {
-    data: {},
+export type ResponseType<T extends object = {}> = {
+    data: T,
     resultCode: number;
     messages: Array<number>,
 }
+
+export type MeResponseType = ResponseType<{
+    id: number;
+    login: string;
+    email: string;
+}>
+export type LoginResponseType = ResponseType<{ id: number }>
 export type GetCaptchaResponseType = {
     url: string;
 }
@@ -35,10 +26,4 @@ export type GetUsersResponseType = {
     totalCount: number;
     error: string | null;
 }
-export type UploadPhotoResponseType = {
-    data: { 
-        photos: PhotoType; 
-    };
-    resultCode: number;
-    messages: Array<string>;
-}
+export type UploadPhotoResponseType = ResponseType<{ photos: PhotoType }>

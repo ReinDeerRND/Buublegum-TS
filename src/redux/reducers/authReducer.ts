@@ -1,7 +1,8 @@
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { authAPI, securityAPI } from "../../api/api";
+import { securityAPI } from "../../api/security-api";
 import { ResponseTypes } from "../../api/api.model";
+import { authAPI } from "../../api/auth-api";
 import { AuthActionType, SetAuthUserDataActionType, SetCaptchaUrlActionType, SET_AUTH_USER_DATA, SET_CAPTCHA_URL } from "../models/auth.model";
 
 
