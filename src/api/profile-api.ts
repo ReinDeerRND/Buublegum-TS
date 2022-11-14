@@ -1,4 +1,4 @@
-import { ProfileType } from "../redux/models/profile.model";
+import { ProfileType } from "../models/profile.model";
 import { axiosConfig } from "./api";
 import { ResponseType, UploadPhotoResponseType } from "./api.model";
 
