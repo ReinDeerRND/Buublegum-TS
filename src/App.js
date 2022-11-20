@@ -51,6 +51,7 @@ class Wrapper extends React.Component {
               <Route path='/music' component={Music} />
               <Route path='/settings' component={Settings} />
               <Route path='/login' component={Login} />
+              <Route path='/error/:error' component={ErrorComponent} />
               <Route path='*' component={ErrorComponent} />
             </Switch>
           </div>

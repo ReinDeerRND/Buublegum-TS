@@ -5,6 +5,7 @@ import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileData from './ProfileData';
 import EditProfileData from './EditProfileData';
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 const ProfileInfo = (props) => {
   const [editMode, setEditMode] = useState(false);
@@ -12,6 +13,11 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />
   }
+
+  if(!props.profile.userId){
+    return <Redirect to="/error/noprofile" />
+  }
+
   let selectedFile = null;
 
   const onFileSelected = (event) => {

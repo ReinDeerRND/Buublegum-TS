@@ -11,6 +11,6 @@ export type ProfileType = {
     fullName?: string;
     lookingForAJob?: boolean;
     lookingForAJobDescription?: string;
-    photos: PhotoType;
+    photos?: PhotoType;
     userId?: number | null;
 }

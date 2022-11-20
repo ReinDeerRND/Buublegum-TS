@@ -61,6 +61,12 @@ const profileReducer = (state = initState, action: ProfileActionsType): ProfileS
                     photos: action.photos
                 }
             }
+        case 'profile/SET_ERROR_PROFILE':
+            return {
+                ...state,
+                profile: { userId: null },
+                status: "This profile doesn't exist"
+            }
         default:
             return state;
     }
@@ -71,6 +77,7 @@ export const profileActions = {
     setUserProfile: (profile: ProfileType) => ({ type: 'profile/SET_USER_PROFILE', profile } as const),
     setStatus: (status: string) => ({ type: 'profile/SET_STATUS', status } as const),
     updatePhoto: (photos: PhotoType) => ({ type: 'profile/UPLOAD_PHOTO_SUCCESS', photos } as const),
+    setErrorProfile: () => ({ type: 'profile/SET_ERROR_PROFILE' } as const),
 }
 type ProfileActionsType = ActionsType<typeof profileActions>;
 
@@ -78,12 +85,19 @@ type ProfileThunkType = ThunkType<ProfileStateType, ProfileActionsType>
 
 export const getProfileThunkCreator = (userId: number): ProfileThunkType => async (dispatch) => {
     let data = await profileAPI.getProfile(userId);
-    dispatch(profileActions.setUserProfile(data));
+    if (data?.userId) {
+        dispatch(profileActions.setUserProfile(data));
+    } else {
+        console.error(`This user ID ${userId} does't exist!`);
+        dispatch(profileActions.setErrorProfile());
+    }
 }
 
 export const getStatusThunkCreator = (userId: number): ProfileThunkType => async (dispatch) => {
     let status = await profileAPI.getStatus(userId);
-    dispatch(profileActions.setStatus(status));
+    if (status) {
+        dispatch(profileActions.setStatus(status));
+    }
 }
 
 export const updateStatusThunkCreator = (status: string): ProfileThunkType => async (dispatch) => {

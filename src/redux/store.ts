@@ -1,5 +1,5 @@
 
-import { Action, combineReducers} from "redux";
+import { Action, combineReducers } from "redux";
 // import { applyMiddleware,  compose  } from "redux";
 // import { legacy_createStore as createStore} from 'redux'; // instead below
 // import { createStore} from 'redux';
@@ -23,24 +23,30 @@ let reducers = combineReducers({
     form: formReducer
 })
 
-type ReducersType  = typeof reducers; //(state: AppStateType)=> AppStateType
+type ReducersType = typeof reducers; //(state: AppStateType)=> AppStateType
 export type AppStateType = ReturnType<ReducersType>;
 
-type PropertiesType<T> = T extends {[action: string]: infer U}? U : never;
-export type ActionsType<T extends  {[action: string]: (...args: any[])=>any}> = ReturnType <PropertiesType<T>>;
+// type PropertiesType<T> = T extends {[action: string]: infer U}? U : never;
+// export type ActionsType<T extends  {[action: string]: (...args: any[])=>any}> = ReturnType <PropertiesType<T>>;
+export type ActionsType<T> = T extends { [action: string]: (...args: any[]) => infer U } ? U : never;
 
-export type ThunkType< StateType, ActionsType extends Action,  ReturnType = void, ExtraType = unknown> = ThunkAction<ReturnType, StateType, ExtraType, ActionsType>;
+export type ThunkType<
+    StateType,
+    ActionsType extends Action,
+    ReturnType = void,
+    ExtraType = unknown
+> = ThunkAction<ReturnType, StateType, ExtraType, ActionsType>;
 
 // without Redux DevTools
-    //let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+//let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 // with Redux DevTools
-    // JS-version
-    //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||  compose;
-    //const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+// JS-version
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||  compose;
+//const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 const store = configureStore({
-    reducer: reducers, 
+    reducer: reducers,
     middleware: [thunkMiddleware]
 });
 
