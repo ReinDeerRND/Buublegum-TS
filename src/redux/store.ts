@@ -1,5 +1,5 @@
 
-import { combineReducers} from "redux";
+import { Action, combineReducers} from "redux";
 // import { applyMiddleware,  compose  } from "redux";
 // import { legacy_createStore as createStore} from 'redux'; // instead below
 // import { createStore} from 'redux';
@@ -8,7 +8,7 @@ import profileReducer from "./reducers/profileReducer";
 import friendsWidgetReducer from "./reducers/friendsWidgetReducer";
 import usersReducer from "./reducers/usersReducer";
 import authReducer from "./reducers/authReducer";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
 import appReducer from "./reducers/app.reducer";
 import { configureStore } from "@reduxjs/toolkit";
@@ -28,6 +28,8 @@ export type AppStateType = ReturnType<ReducersType>;
 
 type PropertiesType<T> = T extends {[action: string]: infer U}? U : never;
 export type ActionsType<T extends  {[action: string]: (...args: any[])=>any}> = ReturnType <PropertiesType<T>>;
+
+export type ThunkType< StateType, ActionsType extends Action,  ReturnType = void, ExtraType = unknown> = ThunkAction<ReturnType, StateType, ExtraType, ActionsType>;
 
 // without Redux DevTools
     //let store = createStore(reducers, applyMiddleware(thunkMiddleware));

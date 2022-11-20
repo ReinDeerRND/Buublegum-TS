@@ -1,13 +1,13 @@
 import { profileAPI } from "../../api/profile-api";
-import { stopSubmit } from "redux-form";
+import { FormAction, stopSubmit } from "redux-form";
 import {
     PostType,
     ProfileType,
 } from '../../models/profile.model';
 import { PhotoType } from "../../models/users.model";
-import { ThunkAction } from "redux-thunk";
 import { ResponseTypes } from "../../api/api.model";
-import { ActionsType } from "../store";
+import { ActionsType, AppStateType, ThunkType } from "../store";
+import { Dispatch } from "react";
 
 export type ProfileStateType = {
     profile: ProfileType | null;
@@ -74,35 +74,37 @@ export const profileActions = {
 }
 type ProfileActionsType = ActionsType<typeof profileActions>;
 
+type ProfileThunkType = ThunkType<ProfileStateType, ProfileActionsType>
 
-type ThunkType = ThunkAction<void, ProfileStateType, unknown, ProfileActionsType>
-
-export const getProfileThunkCreator = (userId: number): ThunkType => async (dispatch: any) => {
+export const getProfileThunkCreator = (userId: number): ProfileThunkType => async (dispatch) => {
     let data = await profileAPI.getProfile(userId);
     dispatch(profileActions.setUserProfile(data));
 }
 
-export const getStatusThunkCreator = (userId: number): ThunkType => async (dispatch: any) => {
+export const getStatusThunkCreator = (userId: number): ProfileThunkType => async (dispatch) => {
     let status = await profileAPI.getStatus(userId);
     dispatch(profileActions.setStatus(status));
 }
 
-export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch: any) => {
+export const updateStatusThunkCreator = (status: string): ProfileThunkType => async (dispatch) => {
     let result = await profileAPI.updateStatus(status);
     if (result.resultCode === ResponseTypes.Success) {
         dispatch(profileActions.setStatus(status));
     }
 }
 
-export const uploadPhoto = (file: any): ThunkType => async (dispatch: any) => {
+export const uploadPhoto = (file: File): ProfileThunkType => async (dispatch) => {
     let response = await profileAPI.uploadPhoto(file);
     if (response.resultCode === 0) {
         dispatch(profileActions.updatePhoto(response.data.photos));
     }
 }
-export const uploadProfileData = (formData: ProfileType): ThunkType => async (dispatch: any, getState: any) => {
-    const userId = getState().auth.userId;
 
+type CombinedThunkType = ThunkType<AppStateType, (ProfileActionsType | FormAction)>;
+
+export const uploadProfileData = (formData: ProfileType): CombinedThunkType => async (dispatch: Dispatch<any>, getState) => {
+    const userId = getState().auth.userId;
+    if (userId === null) return;
     let response = await profileAPI.uploadProfile(formData);
     if (response.resultCode === 0) {
         dispatch(getProfileThunkCreator(userId));

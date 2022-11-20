@@ -15,7 +15,7 @@ export const profileAPI = {
         return axiosConfig.put<ResponseType>(`/profile/status/`, { status: status })
             .then(response => response.data);
     },
-    uploadPhoto(file: any): Promise<UploadPhotoResponseType> {
+    uploadPhoto(file: File): Promise<UploadPhotoResponseType> {
         const formData = new FormData();
         formData.append('image', file)
         return axiosConfig.put<UploadPhotoResponseType>(`/profile/photo`, formData, {
