@@ -3,6 +3,7 @@
     display: flex;
     width: 100%;
     align-items: center;
+    flex-shrink: 0;
 }
 .social div{
     height: 35px;
@@ -11,6 +12,7 @@
     background-image: url("../../../assets/images/social.png");
     background-repeat: no-repeat;
     margin-top: 5px;
+    flex-shrink: 0;
 }
 .social span{
     margin: 0 5px;
