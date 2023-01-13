@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuhRedirect';
 import { AppStateType } from '../../redux/store';
 import { DialogType, MessageType } from '../../models/message.model';
+import React from 'react';
 
 type MapStateToPropsType = {
   dialogs: Array<DialogType>;
@@ -26,7 +27,7 @@ let mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-const DialogsContainer = compose(
+const DialogsContainer = compose<React.ComponentType>(
   withAuthRedirect,
   connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)
 )(Dialogs);

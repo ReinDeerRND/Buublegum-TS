@@ -16,14 +16,18 @@ import Preloader from './components/common/Preloader/Preloader';
 //import { withRouter } from 'react-router-dom';
 import { initApp } from './redux/reducers/app.reducer';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store, { AppStateType } from './redux/store';
 import { withLazyLoad } from './hoc/withLazyLoad';
 
 //lazy-loading components
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
-class Wrapper extends React.Component {
+type WrapperPropsType = {
+  initialized: boolean;
+  initApp(): () =>void;
+}
+class Wrapper extends React.Component<WrapperPropsType> {
   componentDidMount() {
     this.props.initApp();
   }
@@ -62,11 +66,11 @@ class Wrapper extends React.Component {
 
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.isInitialized
 })
 
-const WrapperContainer = compose(
+const WrapperContainer = compose<React.ComponentType>(
   // withRouter,
   connect(mapStateToProps, { initApp })
 )(Wrapper);

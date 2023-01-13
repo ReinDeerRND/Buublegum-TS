@@ -1,3 +1,4 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuhRedirect';
@@ -46,7 +47,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect<MapStateToPropsType, MapDispatchToProps, {/* OwnPropsType */}, AppStateType>(
         mapStateToProps,
