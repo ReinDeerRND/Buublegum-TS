@@ -6,8 +6,18 @@ import ProfileData from './ProfileData';
 import EditProfileData from './EditProfileData';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { ProfileType } from '../../../models/profile.model';
 
-const ProfileInfo = (props) => {
+type PropsType = {
+  profile: ProfileType;
+  status: string;
+  isOwner: boolean;
+  updateStatus: (status: string) => void;
+  uploadPhoto: (file: File) => void;
+  uploadProfileData: (formData: ProfileType) => void; 
+}
+
+const ProfileInfo: React.FC<PropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   if (!props.profile) {
@@ -18,9 +28,9 @@ const ProfileInfo = (props) => {
     return <Redirect to="/error/noprofile" />
   }
 
-  let selectedFile = null;
+  let selectedFile: File | null = null;
 
-  const onFileSelected = (event) => {
+  const onFileSelected = (event: any) => {
     if (event.target?.files?.length) {
       selectedFile = event.target.files[0];
     }
@@ -31,11 +41,11 @@ const ProfileInfo = (props) => {
       props.uploadPhoto(selectedFile);
     }
   }
-  const toggleEditMode = (mode) => {
+  const toggleEditMode = (mode: boolean) => {
     setEditMode(mode);
   }
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: ProfileType) => {
     props.uploadProfileData(formData);
     toggleEditMode(false);
   }

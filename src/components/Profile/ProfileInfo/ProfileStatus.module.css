@@ -10,3 +10,9 @@ img.pencil{
     width: auto;
     margin-left: 5px;
 }
+.input_container{
+    width: 300px;
+}
+input {
+    width: 97%;
+}

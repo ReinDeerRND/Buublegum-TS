@@ -2,7 +2,12 @@ import classes from './Post.module.css'
 import smile from '../../../../assets/images/face_smile.png';
 import likeIcon from '../../../../assets/icons/like.jpg';
 
-const Post = (props) => {
+type PropsType = {
+  text: string;
+  likesCount: number;
+}
+
+const Post: React.FC<PropsType> = (props) => {
   return (
     <div className = {classes.post_container}>
       <img alt="avatar" src={smile} />

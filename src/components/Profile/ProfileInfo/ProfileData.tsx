@@ -1,7 +1,13 @@
+import { ProfileType } from '../../../models/profile.model';
 import classes from './ProfileInfo.module.css';
 import SocialItem from './SocialItem';
 
-const ProfileData = ({ profile, switchToEditMode, isOwner }) => {
+type PropsType = {
+  profile: ProfileType;
+  isOwner: boolean;
+  switchToEditMode: (mode: boolean) => void;
+}
+const ProfileData: React.FC<PropsType> = ({ profile, switchToEditMode, isOwner }) => {
 
   const onSwitchToEditMode = () => {
     switchToEditMode(true);
@@ -20,8 +26,8 @@ const ProfileData = ({ profile, switchToEditMode, isOwner }) => {
       }
       <div>Contacts: </div>
       <div className={classes.social_container}>
-        {Object.keys(profile.contacts).map(key => {
-          let value = profile.contacts[key];
+        {profile?.contacts && Object.keys(profile.contacts).map(key => {
+          let value = profile?.contacts && profile.contacts[key];
           return value ? <SocialItem social={value} title={key} key={key} /> : null;
         })}
       </div>

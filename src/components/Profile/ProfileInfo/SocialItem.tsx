@@ -1,6 +1,12 @@
+import React from 'react';
 import classes from './SocialItem.module.css';
 
-let SocialItem = (props) => {
+type PropsType = {
+    title: string;
+    social: string;
+}
+
+const SocialItem: React.FC<PropsType> = (props) => {
     const styleName = classes[props.title];
     return (
         <div className={classes.social}>
