@@ -4,7 +4,7 @@ import userPhoto from "../../../assets/images/userphoto.jpg";
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileData from './ProfileData';
 import EditProfileData from './EditProfileData';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ProfileType } from '../../../models/profile.model';
 
@@ -30,7 +30,7 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
 
   let selectedFile: File | null = null;
 
-  const onFileSelected = (event: any) => {
+  const onFileSelected = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target?.files?.length) {
       selectedFile = event.target.files[0];
     }

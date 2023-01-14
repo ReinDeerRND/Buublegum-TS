@@ -4,7 +4,6 @@ import classes from './ProfileStatus.module.css';
 type PropsType={
     status: string;
     updateStatus: (status: string) => void;
-
 }
 
 type StateType = {

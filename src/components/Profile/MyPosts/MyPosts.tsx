@@ -1,13 +1,19 @@
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { requiredField, maxLength } from '../../../utils/validators';
 import { TextareaControl } from '../../common/FormControls/FormControls';
+import { PostType } from '../../../models/profile.model';
 
-const MyPosts = React.memo((props) => {
+type PropsType = {
+  posts: PostType[];
+  addPost: (newPost: string) =>void;
+}
+
+const MyPosts: React.NamedExoticComponent<PropsType>= React.memo((props) => {
   let postList = props.posts.map(post => (<Post key={post.id} text={post.text} likesCount={post.likesCount} />))
-  let onSubmit = (newPost) => {
+  let onSubmit = (newPost: {newPost: string}) => {
     props.addPost(newPost.newPost);
   }
   return (
@@ -22,8 +28,11 @@ const MyPosts = React.memo((props) => {
     </div>
   )
 })
+type NewPostFormProps = {
+  newPost: string;
+}
 const maxLength100 = maxLength(100);
-const NewPostForm = (props) => {
+const NewPostForm: React.FC<InjectedFormProps<NewPostFormProps, {}, string>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className={classes.myposts_form}>
@@ -40,6 +49,6 @@ const NewPostForm = (props) => {
   )
 }
 
-const NewPostFormRedux = reduxForm({ form: "newPost" })(NewPostForm);
+const NewPostFormRedux = reduxForm<NewPostFormProps, {}>({ form: "newPost" })(NewPostForm);
 
 export default MyPosts;

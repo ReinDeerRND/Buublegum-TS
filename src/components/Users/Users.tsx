@@ -17,6 +17,7 @@ type PropsType = {
 
 const Users: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, onPageChanged, users, ...props }) => {
     return <div>
+        <div className={classes.title}> Users of BubbleGum Web</div>
         <Paginator selectedPage={selectedPage} totalCount={totalCount} pageSize={pageSize} onPageChanged={onPageChanged} />
         <div className={classes.users_container}>
             {

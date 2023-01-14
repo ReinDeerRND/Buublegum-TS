@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useState, useEffect } from "react";
 import classes from './ProfileStatus.module.css';
 import pencil from '../../../assets/icons/pen.png';
@@ -27,7 +27,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
         setEditMode(false);
         props.updateStatus(status);
     }
-    const onStatusChange = (event: any) => {
+    const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
         setStatus(event.target.value);
     };
 
