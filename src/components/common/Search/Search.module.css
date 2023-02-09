@@ -1,0 +1,15 @@
+.form_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.form_wrapper form input {
+    padding: 5px;
+}

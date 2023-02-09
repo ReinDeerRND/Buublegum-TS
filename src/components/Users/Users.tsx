@@ -3,6 +3,7 @@ import { UserType } from "../../models/users.model";
 import Paginator from "../common/Paginator/Paginator";
 import classes from './Users.module.css';
 import User from "./User";
+import Search from "../common/Search/Search";
 
 type PropsType = {
     selectedPage: number;
@@ -19,6 +20,7 @@ const Users: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, onPage
     return <div>
         <div className={classes.title}> Users of BubbleGum Web</div>
         <Paginator selectedPage={selectedPage} totalCount={totalCount} pageSize={pageSize} onPageChanged={onPageChanged} />
+        <Search search={(data)=>{console.log(data)}}/>
         <div className={classes.users_container}>
             {
                 users.map((user: UserType) => <User
