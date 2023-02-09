@@ -31,13 +31,17 @@ const Paginator: React.FC<PropsType> = ({ selectedPage, totalCount, pageSize, on
         setSelectedChunk(selectedChunk - 1);
     }
     return <div className={classes.pages_container}>
-        {selectedChunk > 0 && <button onClick={showPreviousChunk}> Previous </button>}
+        <div className={classes.button_container}>
+            {selectedChunk > 0 && <button onClick={showPreviousChunk}> Previous </button>}
+        </div>
         <div>
             {pages.map(p => <span className={classes.page_item} key={p} onClick={(e) => onPageChanged(p)}>
                 <span className={cn({ [classes.active_page]: selectedPage === p })} >{p + 1}</span>
             </span>)}
         </div>
-        {selectedChunk < (pagesAmount / partChunk) - 1 && <button onClick={showNextChunk}> Next </button>}
+        <div className={classes.button_container}>
+            {selectedChunk < (pagesAmount / partChunk) - 1 && <button onClick={showNextChunk}> Next </button>}
+        </div>
     </div>
 }
 
